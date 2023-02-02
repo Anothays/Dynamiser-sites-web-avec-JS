@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+    --tw-gradient-stops: var(pink,purple);
+}  
+
+.cube-container {
+    perspective: 1000px;
+    margin: 0px auto 100px;
+    @apply w-32 h-32
+}
+
+.cube {
+    position: relative;
+    transform-style: preserve-3d; 
+    transform: rotateY(43deg) rotateZ(-15deg) rotateX(-15deg);
+    transition: 1s;
+    animation: spin 15s infinite linear;
+    @apply w-full h-full;
+}
+
+.cube-side {
+    @apply h-full w-full absolute border border-gray-500 flex items-center justify-center text-white text-5xl;
+}
+
+.top {
+   transform: rotateX(90deg) translateZ(4rem) 
+}
+
+.bot {
+   transform: rotateX(-90deg) translateZ(4rem) 
+}
+
+.left {
+   transform: rotateY(-90deg) translateZ(4rem) 
+}
+
+.right {
+   transform: rotateY(90deg) translateZ(4rem) 
+}
+
+.back {
+   transform: rotateX(-180deg) translateZ(4rem) 
+}
+
+.front {
+   transform: translateZ(4rem) 
+}
+
+@keyframes spin {
+    from {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    to {
+        transform: rotateX(360deg) rotateY(360deg)
+    }
+}
