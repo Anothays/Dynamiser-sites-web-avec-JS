@@ -1,29 +1,74 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: "Lato-Thin";
+    src: url("../src/fonts/Lato/Lato-Thin.ttf");
+};
+@font-face {
+    font-family: "Lato-Light";
+    src: url("../src/fonts/Lato/Lato-Light.ttf");
+};
+
 
 
 :root {
     --tw-gradient-stops: var(pink,purple);
-}  
+}
+
+
+.custom-font {
+    font-family: "Lato-Thin";
+    @apply text-gray-500 text-3xl
+}
+
+.player-ui {
+    @apply h-full w-full flex flex-col items-center ;
+}
+
+.score-container {
+    @apply flex flex-col items-center mt-5 custom-font;
+}
+
+.player-name {
+    @apply h-14 text-5xl;
+}
+
+.player-score {
+    @apply text-7xl
+}
+
 
 .cube-container {
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: fixed;
     perspective: 1000px;
     margin: 0px auto 100px;
+    animation: tinyBounce 2s infinite alternate linear;
     @apply w-32 h-32
 }
+
 
 .cube {
     position: relative;
     transform-style: preserve-3d; 
-    transform: rotateY(43deg) rotateZ(-15deg) rotateX(-15deg);
-    transition: 1s;
+    z-index: 1;
+    /* transform: rotateY(-90deg) rotateZ(0deg) rotateX(00deg); */
+    /* transition: 0.3s; */
     animation: spin 15s infinite linear;
-    @apply w-full h-full;
+    @apply w-full h-full custom-font;
+}
+
+.cube:hover {
+    cursor: pointer
 }
 
 .cube-side {
-    @apply h-full w-full absolute border border-gray-500 flex items-center justify-center text-white text-5xl;
+    @apply h-full w-full absolute border border-gray-500 flex 
+    items-center justify-center  text-7xl bg-gradient-to-br from-zinc-100 to-slate-400;
 }
 
 .top {
@@ -50,12 +95,111 @@
    transform: translateZ(4rem) 
 }
 
+/* .shadow {
+    width: 100%;
+    height: 50%;
+    background-color: grey;
+    opacity: 15%;
+    z-index: 0;
+    border-radius: 100% / 100%;
+    animation: makeUpTinyBounce 2s infinite alternate linear;   
+} */
+
+@keyframes tinyBounce {
+    from {transform:translateX(-50%) translateY(-50%);}
+    50% {transform:translateX(-50%) translateY(-35%);}
+    to {transform:translateX(-50%) translateY(-50%);}
+}
+/* 
+@keyframes makeUpTinyBounce {
+    from {transform:translateX(-50%) translateY(-35%);}
+    50% {transform:translateX(-50%) translateY(-50%);}
+    to {transform:translateX(-50%) translateY(-35%);}
+} */
+
 @keyframes spin {
+    from {transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);}
+    to {transform: rotateX(345deg) rotateY(403deg) rotateX(-15deg);}
+}
+
+@keyframes spinAfterBounce {
     from {
-        transform: rotateX(0deg) rotateY(0deg);
+        transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);
     }
 
     to {
-        transform: rotateX(360deg) rotateY(360deg)
+        transform: rotateX(360deg) rotateY(360deg) rotateX(0deg);
     }
 }
+
+/* 
+1 Y0 Z0 X180
+2 Y0 Z0 X90
+3 Y90 Z0 X0
+4 Y0 Z0 X-90
+5 Y-90 Z0 X0
+6 Y0 Z0 X0 
+*/
+@keyframes bounce-1 {
+    from {transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);}
+    15% {transform: rotateY(360deg) translateY(-69rem) rotateZ(360deg) rotateX(180deg);}
+    30% {transform: translateY(-30rem) rotateY(180deg) rotateZ(180deg) rotateX(270deg);}
+    50% {transform: translateY(0rem) rotateY(0deg) rotateZ(0deg) rotateX(180deg);}
+    90% {transform: translateY(0rem) rotateY(0deg) rotateZ(0deg) rotateX(180deg);} 
+    to {transform: rotateX(0deg) translateY(0rem) rotateY(0deg) rotateZ(0deg);}
+}
+
+@keyframes bounce-2 {
+    from {transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);}
+    15% {transform: rotateY(360deg) translateY(-69rem) rotateZ(360deg) rotateX(180deg);}
+    30% {transform: translateY(-30rem) rotateY(180deg) rotateZ(180deg) rotateX(270deg);}
+    50% {transform: translateY(0rem) rotateY(0deg) rotateZ(0deg) rotateX(90deg);}
+    90% {transform: translateY(0rem) rotateY(0deg) rotateZ(0deg) rotateX(90deg);} 
+    to {transform: rotateX(0deg) translateY(0rem) rotateY(0deg) rotateZ(0deg);}
+}
+
+@keyframes bounce-3 {
+    from {transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);}
+    15% {transform: rotateY(360deg) translateY(-69rem) rotateZ(360deg) rotateX(180deg);}
+    30% {transform: translateY(-30rem) rotateY(180deg) rotateZ(180deg) rotateX(270deg);}
+    50% {transform: translateY(0rem) rotateY(90deg) rotateZ(0deg) rotateX(0deg);}
+    90% {transform: translateY(0rem) rotateY(90deg) rotateZ(0deg) rotateX(0deg);} 
+    to {transform: rotateX(0deg) translateY(0rem) rotateY(0deg) rotateZ(0deg);}
+}
+
+@keyframes bounce-4 {
+    from {transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);}
+    15% {transform: rotateY(360deg) translateY(-69rem) rotateZ(360deg) rotateX(180deg);}
+    30% {transform: translateY(-30rem) rotateY(180deg) rotateZ(180deg) rotateX(270deg);}
+    50% {transform: translateY(0rem) rotateY(0deg) rotateZ(0deg) rotateX(-90deg);}
+    90% {transform: translateY(0rem) rotateY(0deg) rotateZ(0deg) rotateX(-90deg);} 
+    to {transform: rotateX(0deg) translateY(0rem) rotateY(0deg) rotateZ(0deg);}
+}
+
+@keyframes bounce-5 {
+    from {transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);}
+    15% {transform:  rotateY(360deg) translateY(-69rem) rotateZ(360deg) rotateX(180deg);}
+    30% {transform: translateY(-30rem) rotateY(180deg) rotateZ(180deg) rotateX(270deg);}
+    50% {transform: translateY(0rem) rotateY(-90deg) rotateZ(0deg) rotateX(0deg);}
+    90% {transform: translateY(0rem) rotateY(-90deg) rotateZ(0deg) rotateX(0deg);} 
+    to {transform: rotateX(0deg) translateY(0rem) rotateY(0deg) rotateZ(0deg);}
+}
+
+@keyframes bounce-6 {
+    from {transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);}
+    15% {transform:  rotateY(360deg) translateY(-69rem) rotateZ(360deg) rotateX(180deg);}
+    30% {transform: translateY(-30rem) rotateY(180deg) rotateZ(180deg) rotateX(270deg);}
+    50% {transform: translateY(0rem) rotateY(0deg) rotateZ(0deg) rotateX(0deg);}
+    90% {transform: translateY(0rem) rotateY(0deg) rotateZ(0deg) rotateX(0deg);} 
+    to {transform: rotateX(0deg) translateY(0rem) rotateY(0deg) rotateZ(0deg);}
+}
+
+.btn {
+    @apply px-20 py-5 m-5 bg-transparent rounded border-2 
+    custom-font shadow-2xl;
+}
+
+.btn:hover {
+   @apply shadow-black
+}
+
