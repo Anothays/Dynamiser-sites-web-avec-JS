@@ -3,125 +3,191 @@
 @tailwind utilities;
 @font-face {
     font-family: "Lato-Thin";
-    src: url("../src/fonts/Lato/Lato-Thin.ttf");
+    src: url("../dist/fonts/Lato/Lato-Thin.ttf");
 };
 @font-face {
     font-family: "Lato-Light";
-    src: url("../src/fonts/Lato/Lato-Light.ttf");
+    src: url("../dist/fonts/Lato/Lato-Light.ttf");
+};
+@font-face {
+    font-family: "Lato-Bold";
+    src: url("../dist/fonts/Lato/Lato-Bold.ttf");
 };
 
 
-
+/* GENERAL */
 :root {
     --tw-gradient-stops: var(pink,purple);
 }
-
-
 .custom-font {
     font-family: "Lato-Thin";
-    @apply text-gray-500 text-3xl
+    @apply text-gray-700 text-5xl
 }
-
 .player-ui {
-    @apply h-full w-full flex flex-col items-center ;
+    @apply hidden h-full w-full flex-col items-center ;
 }
 
-.score-container {
+.current-container {
     @apply flex flex-col items-center mt-5 custom-font;
 }
 
+.score-container {
+    @apply custom-font flex flex-col justify-center items-center
+}
+
+.hold-container {
+    @apply flex w-1/2 h-full flex-col items-center rounded justify-end
+}
+
 .player-name {
-    @apply h-14 text-5xl;
+    @apply h-14 text-7xl mb-5;
 }
 
 .player-score {
-    @apply text-7xl
+    font-family: "Lato-Bold";
+    @apply text-9xl mt-2 opacity-30 scale-150
+}
+
+.currentScore {
+    font-family: "Lato-Bold";
+    @apply opacity-30 m-2 text-6xl
+}
+
+/* MENU NAVIGATION */
+.header {
+    box-shadow: 1px 0px 15px  grey;
+    transform: translateX(-200%);
+    @apply bg-white z-50 h-full w-32 absolute justify-center items-center transition-transform bg-gradient-to-br from-zinc-100 to-zinc-200
+}
+.navigation {
+    @apply flex flex-col justify-start items-center w-full h-full pt-10
+}
+.navigation li {
+    @apply p-2 m-3 
+}
+.navigation a:hover {
+    @apply text-blue-400 cursor-pointer transition-all
+}
+.menu-icon {
+    display: block;
+    position: fixed;
+    left: 10px;
+    top: 12px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 100;
+    background: #333;
+    transition: all .2s ease-out;
+    width: 18px;
+    height: 2px;
+}
+.menu-icon:before,
+.menu-icon:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+.menu-icon:before {
+    top: 5px;
+}
+.menu-icon:after {
+    top: -5px;
+}
+.menu-btn:checked ~ .menu-icon {
+    background: transparent;
+}
+.menu-btn:checked ~ .menu-icon:before {
+    transform: rotate(-45deg);
+    top: 0;
+}
+.menu-btn:checked ~ .menu-icon:after {
+    transform: rotate(45deg);
+    top: 0;
+}
+.menu-btn:checked ~ .header {
+    transform: translateX(0)
+}
+.menu-btn {
+    display: none;
+}
+
+/* BUTTONS */
+/* .btn-container {
+    @apply flex 
+} */
+.btn {
+    @apply  bg-transparent rounded border-2 shadow-xl;
+    transition: 0.3s;
+    font-family: "Lato-Thin";
+}
+.btn:hover {
+   @apply border-blue-400
 }
 
 
 .cube-container {
-    z-index: 1;
     top: 50%;
     left: 50%;
+    z-index: 40;
     transform: translateX(-50%) translateY(-50%);
     position: fixed;
     perspective: 1000px;
     margin: 0px auto 100px;
+    transition: 1s;
     animation: tinyBounce 2s infinite alternate linear;
     @apply w-32 h-32
 }
 
-
+/* CUBE */
 .cube {
     position: relative;
     transform-style: preserve-3d; 
-    z-index: 1;
     /* transform: rotateY(-90deg) rotateZ(0deg) rotateX(00deg); */
     /* transition: 0.3s; */
     animation: spin 15s infinite linear;
     @apply w-full h-full custom-font;
 }
-
 .cube:hover {
-    cursor: pointer
+    cursor: pointer;
 }
-
 .cube-side {
     @apply h-full w-full absolute border border-gray-500 flex 
     items-center justify-center  text-7xl bg-gradient-to-br from-zinc-100 to-slate-400;
 }
-
 .top {
    transform: rotateX(90deg) translateZ(4rem) 
 }
-
 .bot {
    transform: rotateX(-90deg) translateZ(4rem) 
 }
-
 .left {
    transform: rotateY(-90deg) translateZ(4rem) 
 }
-
 .right {
    transform: rotateY(90deg) translateZ(4rem) 
 }
-
 .back {
    transform: rotateX(-180deg) translateZ(4rem) 
 }
-
 .front {
    transform: translateZ(4rem) 
 }
 
-/* .shadow {
-    width: 100%;
-    height: 50%;
-    background-color: grey;
-    opacity: 15%;
-    z-index: 0;
-    border-radius: 100% / 100%;
-    animation: makeUpTinyBounce 2s infinite alternate linear;   
-} */
-
+/* CUBE keyframes */
 @keyframes tinyBounce {
     from {transform:translateX(-50%) translateY(-50%);}
     50% {transform:translateX(-50%) translateY(-35%);}
     to {transform:translateX(-50%) translateY(-50%);}
 }
-/* 
-@keyframes makeUpTinyBounce {
-    from {transform:translateX(-50%) translateY(-35%);}
-    50% {transform:translateX(-50%) translateY(-50%);}
-    to {transform:translateX(-50%) translateY(-35%);}
-} */
 
 @keyframes spin {
     from {transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);}
-    to {transform: rotateX(345deg) rotateY(403deg) rotateX(-15deg);}
+    to {transform: rotateX(360deg) rotateY(360deg) rotateX(0deg);}
 }
-
 @keyframes spinAfterBounce {
     from {
         transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);
@@ -194,12 +260,27 @@
     to {transform: rotateX(0deg) translateY(0rem) rotateY(0deg) rotateZ(0deg);}
 }
 
-.btn {
-    @apply px-20 py-5 m-5 bg-transparent rounded border-2 
-    custom-font shadow-2xl;
-}
 
-.btn:hover {
-   @apply shadow-black
-}
 
+/* MODAL */
+
+.modal {
+    @apply absolute hidden z-50 w-80 h-72 drop-shadow-2xl top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 bg-white rounded
+}
+.modal .modalTitle {
+    @apply w-full h-12 bg-slate-200 flex justify-center items-center rounded-t;
+    font-family: "Lato-light";
+}
+.modal .playerInputName {
+    @apply m-3 p-3 ;
+    font-family: "Lato-light";
+}
+.modal .playerInputName:focus {
+}
+.modal input {
+    @apply border rounded w-10/12 relative bottom-0;
+    font-family: "Lato-Thin";
+}
+.modal .modalButtons {
+    @apply flex justify-center items-center 
+}
