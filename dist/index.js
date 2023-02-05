@@ -18,13 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let holdButton1 = document.getElementById('btnHold1')
     let holdButton2 = document.getElementById('btnHold2')
 
-    // POUR LES TEST
-    // document.addEventListener('click', e => {
-    //     console.log(window.innerWidth);
-    //     console.log(document.documentElement.clientWidth);
-    //     console.log(document.body.clientWidth);
-    // })
-
     cube.addEventListener('click', e => {
         const randomNumber = Math.floor(Math.random() * 6) + 1;
         cube.style.animation = 'none';
@@ -55,18 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const scoreToUpdate = document.getElementById(`player${idCurrentPlayer}-score`)
                 const pseudo = document.getElementById(`pseudo${idCurrentPlayer}`)
                 if (randomNumber === 1) {
-                    current.innerText = "0";
+                    updateCurrent(0);
                     tour += 1
                     refreshCurrentPlayer()
                     // Faire une animation
-                } else if (randomNumber === 6) {
-                    oldScore = Number(scoreToUpdate.innerText)
-                    scoreToUpdate.innerText = oldScore + Number(randomNumber)
-                    current.innerText = "0"
-                    tour += 1
-                    refreshCurrentPlayer()
                 } else {
-                    current.innerText = randomNumber
+                    const current = Number(document.getElementById(`score-round${idCurrentPlayer}`).innerText)
+                    updateCurrent(current + randomNumber)
                 }
                 if (Number(scoreToUpdate.innerText) >= targetScore || Number(current.innerText) + Number(scoreToUpdate.innerText) >= targetScore) {
                     const win = document.createElement('div')
@@ -92,11 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     holdButton1.addEventListener('click', e => {
         if (idCurrentPlayer === 1) {
-            const scoreToUpdate = document.getElementById(`player1-score`)
-            const current = document.getElementById(`score-round1`)
-            oldScore = Number(scoreToUpdate.innerText)
-            scoreToUpdate.innerText = oldScore + Number(current.innerText)
-            current.innerText = "0"
+            const current = Number(document.getElementById(`score-round${idCurrentPlayer}`).innerText)
+            updateScore(current)
+            updateCurrent(0)
             tour += 1
             refreshCurrentPlayer()
         } else {
@@ -106,11 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     holdButton2.addEventListener('click', e => {
         if (idCurrentPlayer === 2) {
-            const scoreToUpdate = document.getElementById(`player2-score`)
-            const current = document.getElementById(`score-round2`)
-            oldScore = Number(scoreToUpdate.innerText)
-            scoreToUpdate.innerText = oldScore + Number(current.innerText)
-            current.innerText = "0"
+            const current = Number(document.getElementById(`score-round${idCurrentPlayer}`).innerText)
+            updateScore(current)
+            updateCurrent(0)
             tour += 1
             refreshCurrentPlayer()
         } else {
@@ -222,14 +206,21 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             cubeContainer.style.left = '50%'
         }
-        
     }
 
     window.addEventListener('resize', e => {
         refreshCurrentPlayer();
     })
 
+    function updateCurrent(number) {
+        const current = document.getElementById(`score-round${idCurrentPlayer}`)
+        current.innerText = number
 
+    }
 
+    function updateScore(number) {
+        const scoreToUpdate = document.getElementById(`player${idCurrentPlayer}-score`)
+        scoreToUpdate.innerText = Number(scoreToUpdate.innerText) + number
+    }
 })
 
