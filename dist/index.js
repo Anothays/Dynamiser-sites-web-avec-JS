@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cube = document.getElementById('cube')
     const newGameBtn = document.getElementById('newGameBtn')
     const stopGameBtn = document.getElementById('stopGameBtn')
+    const rulesGameBtn = document.getElementById('Rules')
     const modal = document.getElementById('modal')
     const background = document.getElementById('container')
     const form = document.getElementById('form')
@@ -120,6 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
     newGameBtn.addEventListener('click', e => {
         modal.style.display = 'block';
         background.style.opacity = '0.5'
+    })
+
+    rulesGameBtn.addEventListener('click', e => {
+        const rulesModal = document.getElementById('rulesModal')
+        rulesModal.style.display = 'block';
+        background.style.opacity = '0.5'
+        const rulesModalOKBtn = document.getElementById('rulesModal-ok')
+        rulesModalOKBtn.addEventListener('click', e => {
+            rulesModal.style.display = 'none';
+            background.style.opacity = '1'
+        })
     })
 
     stopGameBtn.addEventListener('click', e => {

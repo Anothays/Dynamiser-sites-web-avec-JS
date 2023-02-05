@@ -257,7 +257,7 @@
 /* MODAL */
 
 .modal {
-    @apply absolute hidden z-50 w-80 h-72 drop-shadow-2xl top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 bg-white rounded
+    @apply absolute hidden z-50  drop-shadow-2xl top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 bg-white rounded
 }
 .modal .modalTitle {
     @apply w-full h-12 bg-slate-200 flex justify-center items-center rounded-t;
@@ -275,4 +275,9 @@
 }
 .modal .modalButtons {
     @apply flex justify-center items-center 
+}
+
+.modalText {
+    font-family: "Lato-Thin";
+     @apply m-3 text-justify text-lg
 }

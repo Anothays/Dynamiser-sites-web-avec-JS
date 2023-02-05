@@ -86,6 +86,25 @@
         </form>
     </div>
 
+    <div class="modal" id="rulesModal">
+        <div class="modalTitle">
+            <label for="rules">Règles du jeu</label>
+        </div>
+        <div class="modalText ">
+            <p>
+                Chaque joueur possède un score temporaire (ROUND) et un score global (GLOBAL)<br><br>
+                À chaque tour, le joueur a son ROUND initialisé à 0 et peut lancer un dé autant de fois qu'il le souhaite. Le résultat d’un lancer est ajouté au ROUND.<br><br>
+                Lors de son tour, le joueur peut décider à tout moment de:<br>
+                - Cliquer sur l’option “Hold”, qui permet d’envoyer les points du ROUND vers le GLOBAL. Ce sera alors le tour de l’autre joueur.<br>
+                - Lancer le dé. S’il obtient un 1, son score ROUND est perdu et c’est la fin de son tour.<br>
+                Le premier joueur qui atteint les 100 points sur global gagne le jeu.<br>
+            </p>
+        </div>
+        <div class="modalButtons">
+            <button class="btn w-1/2 p-3 m-3" id="rulesModal-ok">ok j'ai compris</button>
+        </div>
+    </div>
+
     <script src="index.js"></script>
 </body>
 </html>
