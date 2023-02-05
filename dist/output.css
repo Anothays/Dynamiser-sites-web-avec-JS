@@ -654,19 +654,19 @@ video {
 @font-face {
   font-family: "Lato-Thin";
 
-  src: url("/dist/fonts/Lato/Lato-Thin.ttf");
+  src: url("./fonts/Lato/Lato-Thin.ttf");
 }
 
 @font-face {
   font-family: "Lato-Light";
 
-  src: url("/dist/fonts/Lato/Lato-Light.ttf");
+  src: url("./fonts/Lato/Lato-Light.ttf");
 }
 
 @font-face {
   font-family: "Lato-Bold";
 
-  src: url("/dist/fonts/Lato/Lato-Bold.ttf");
+  src: url("./fonts/Lato/Lato-Bold.ttf");
 }
 
 /* GENERAL */
@@ -976,14 +976,8 @@ video {
     transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);
   }
 
-  to {
-    transform: rotateX(360deg) rotateY(360deg) rotateX(0deg);
-  }
-}
-
-@keyframes spinAfterBounce {
-  from {
-    transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);
+  50%{
+    transform: rotateY(180deg) rotateZ(180deg) rotateX(180deg);
   }
 
   to {
@@ -1186,13 +1180,13 @@ video {
   border-top-right-radius: 0.25rem;
   --tw-bg-opacity: 1;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity));
-  font-family: "Lato-light";
+  font-family: "Lato-Light";
 }
 
 .modal .playerInputName {
   margin: 0.75rem;
   padding: 0.75rem;
-  font-family: "Lato-light";
+  font-family: "Lato-Light";
 }
 
 .modal .playerInputName:focus {

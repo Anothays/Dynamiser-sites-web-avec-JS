@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 if (Number(scoreToUpdate.innerText) >= targetScore || Number(current.innerText) + Number(scoreToUpdate.innerText) >= targetScore) {
                     const win = document.createElement('div')
-                    // win.id = 'winnerMessage'
                     win.innerText = `Féliciation ${pseudo.innerText}, vous avez gagné !`
                     win.id = 'winnerMessage'
                     win.style.fontFamily = 'Lato-Bold'
@@ -79,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     win.style.top = '20px'
                     win.style.width = '100%'
                     win.style.textAlign = 'center'
-                    // win.style.transform = 'translateX(-50%)'
                     document.getElementById('container').appendChild(win)
                     stopGame()
                 }
